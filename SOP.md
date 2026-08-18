@@ -1,0 +1,104 @@
+# SOP — 升级与维护流程
+
+## 场景一：首次汉化
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/jiangnanquan/Antigravity-zh.git
+cd Antigravity-zh
+
+# 2. 预检、安装并自动验收
+bash scripts/install.sh
+
+# 3. 人工验收
+# 再启动 agy，观察真实交互界面
+```
+
+人工验收时输入 `/`，至少检查菜单首屏、末屏和底部快捷键提示；命令名应保持英文，
+右侧说明应为中文，HUD 应保持上游原版。
+
+## 场景二：AGY 官方升级后重新汉化
+
+```bash
+# 1. 确认新版本
+agy --version
+
+# 2. HUD 层：确认仍为上游原版
+bash scripts/patch_hud.sh --check-original
+
+# 3. 二进制层：先干跑；未知版本会因版本或 SHA-256 不同而安全拒绝
+bash scripts/patch_binary.sh --dry-run
+
+# 如果这里失败，停止。不得复制旧偏移、跳过哈希或直接全局替换字符串。
+
+# 4. 维护者用 pclntab 和反汇编确认新偏移，更新翻译表后再安装
+go run scripts/go_func_ranges.go ~/.local/bin/agy HintNavigate HintScrollPage
+bash scripts/patch_binary.sh
+bash scripts/patch_skill_descriptions.sh
+bash scripts/smoke_test.sh
+```
+
+## 场景三：汉化不生效
+
+```bash
+# 1. HUD 层：同时检查插件源码与真正执行的已部署 runtime 均为原版
+bash scripts/patch_hud.sh --check-original
+
+# 2. 检查已部署 runtime 使用自动语言设置
+grep '"language": "auto"' ~/.gemini/antigravity-cli/agy-hud-runtime/runtime/agy-hud.config.json
+
+# 3. 二进制层：检查签名与 patch 状态
+bash scripts/patch_binary.sh --status
+
+# 4. 内置 Skill：检查菜单说明状态
+bash scripts/patch_skill_descriptions.sh --check
+```
+
+## 场景四：回滚到英文
+
+```bash
+# HUD 层：仅在曾主动运行 --apply 时恢复
+bash scripts/patch_hud.sh --restore
+
+# 二进制层
+bash scripts/patch_binary.sh --restore
+
+# 内置 Skill 说明
+bash scripts/patch_skill_descriptions.sh --restore
+```
+
+## 场景五：贡献新翻译
+
+```bash
+# 1. 先阅读 AI_TRANSLATION_GUIDE.md，再编辑翻译表
+# 二进制偏移必须有目标版本的函数定位、原文字节和真实 TUI 证据
+# HUD 层（可选实验，不属于默认安装）→ i18n/hud-translations.json
+# 二进制层 → i18n/binary-translations.json
+# 内置 Skill 说明 → i18n/skill-translations.json
+
+# 2. 重新应用
+bash scripts/patch_hud.sh --check-original
+bash scripts/patch_binary.sh
+bash scripts/patch_skill_descriptions.sh
+
+# 3. 验证仓库一致性和真实安装
+bash scripts/smoke_test.sh
+git diff --check
+```
+
+## 场景六：安全诊断 `zsh: killed agy`
+
+```bash
+# 1. 查看当前状态；签名无效时脚本会明确报错
+bash scripts/patch_binary.sh --status
+
+# 2. 从 Google 原签名备份恢复
+bash scripts/patch_binary.sh --restore
+
+# 3. 确认原版可启动后，再按当前清单重新安装
+agy --version
+bash scripts/install.sh
+```
+
+不要重新运行旧的全局字符串替换脚本。macOS 会直接杀死签名失效的 Mach-O，表现为
+`zsh: killed agy`，这不是普通的 TUI 崩溃。

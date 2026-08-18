@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "description": "agy 内置 Skill 在斜杠菜单中的说明汉化",
+    "root": "~/.gemini/antigravity-cli/builtin"
+  },
+  "patches": [
+    {
+      "path": "skills/agy-customizations/SKILL.md",
+      "en": "description: >-\n  Comprehensive guide and reference for the Antigravity Customization System.\n  Use to explain how customizations work, their loading priority, discovery mechanisms,\n  and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
+      "zh": "description: >-\n  Antigravity 自定义系统的完整指南与参考。\n  介绍自定义机制、加载优先级与发现方式，\n  并指导创建技能、规则、插件、钩子及 MCP 服务器。",
+      "context": "/agy-customizations 右侧说明"
+    },
+    {
+      "path": "skills/antigravity_guide/SKILL.md",
+      "en": "description: Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
+      "zh": "description: 提供 Google Antigravity（AGY）的完整指南、快速参考和导航，涵盖 Antigravity CLI（agy）、Antigravity 2.0、Antigravity IDE、Python SDK、斜杠命令、快捷键及自定义功能（技能、规则、MCP、sidecar）。当用户询问如何使用、配置或自定义 Antigravity、AGY、agy CLI、Antigravity IDE 或 Antigravity 2.0 时启用此技能。",
+      "context": "/antigravity-guide 右侧说明"
+    }
+  ]
+}

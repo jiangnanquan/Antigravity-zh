@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "description": "agy-hud 插件 HUD 层翻译表",
+    "target": "~/.gemini/config/plugins/agy-hud/runtime/",
+    "version": "1.0.0",
+    "agy_version": "1.1.13"
+  },
+  "renderer.js": [
+    {
+      "key": "unknownBranch",
+      "en": "unknown",
+      "zh": "未知",
+      "line": 129,
+      "context": "Git 分支名兜底值"
+    },
+    {
+      "key": "freePlan",
+      "en": "Free",
+      "zh": "免费版",
+      "line": 141,
+      "context": "套餐名兜底值"
+    },
+    {
+      "key": "unknownModel",
+      "en": "Unknown Model",
+      "zh": "未知模型",
+      "line": 145,
+      "context": "模型名兜底值"
+    },
+    {
+      "key": "tokenIn",
+      "en": "in: ",
+      "zh": "入: ",
+      "line": 239,
+      "context": "令牌输入标签"
+    },
+    {
+      "key": "tokenOut",
+      "en": "out: ",
+      "zh": "出: ",
+      "line": 239,
+      "context": "令牌输出标签"
+    },
+    {
+      "key": "tokenCache",
+      "en": "cache: ",
+      "zh": "缓存: ",
+      "line": 242,
+      "context": "令牌缓存标签"
+    },
+    {
+      "key": "tokensLabel",
+      "en": "Tokens",
+      "zh": "令牌",
+      "line": 245,
+      "context": "令牌总量前缀"
+    },
+    {
+      "key": "quotaLabel",
+      "en": "Quota: ",
+      "zh": "额度: ",
+      "line": 279,
+      "context": "紧凑模式额度标签"
+    },
+    {
+      "key": "imageQuotaExhausted",
+      "en": "Image Quota Exhausted (Resets in: ",
+      "zh": "图片额度已耗尽 (重置倒计时: ",
+      "line": 293,
+      "context": "图片额度耗尽提示"
+    },
+    {
+      "key": "imageQuotaLabel",
+      "en": "Image Quota: ",
+      "zh": "图片额度: ",
+      "line": 310,
+      "context": "图片额度标签"
+    },
+    {
+      "key": "rulesCount",
+      "en": "rules",
+      "zh": "规则",
+      "line": 334,
+      "context": "规则数量后缀"
+    },
+    {
+      "key": "mcpsCount",
+      "en": "MCPs",
+      "zh": "MCPs",
+      "line": 335,
+      "context": "MCP 数量后缀（保留英文）",
+      "skip": true
+    },
+    {
+      "key": "hooksCount",
+      "en": "hooks",
+      "zh": "hooks",
+      "line": 336,
+      "context": "Hooks 数量后缀（保留英文）",
+      "skip": true
+    }
+  ],
+  "quota-render.js": [
+    {
+      "key": "providerOther",
+      "en": "Other",
+      "zh": "其他",
+      "line": 69,
+      "context": "未知 provider 兜底名"
+    }
+  ],
+  "lang.js (已有)": [
+    {
+      "key": "quotaUnavailable",
+      "en": "Quota unavailable",
+      "zh": "额度不可用",
+      "status": "已翻译"
+    },
+    {
+      "key": "quotaLoading",
+      "en": "Quota loading",
+      "zh": "额度加载中",
+      "status": "已翻译"
+    },
+    {
+      "key": "quotaReasons.not_logged_in",
+      "en": "not logged into Antigravity",
+      "zh": "未登录 Antigravity",
+      "status": "已翻译"
+    },
+    {
+      "key": "quotaReasons.expired_token",
+      "en": "Antigravity token expired",
+      "zh": "Antigravity token 已过期",
+      "status": "已翻译"
+    },
+    {
+      "key": "quotaReasons.auth_failed",
+      "en": "Antigravity auth failed",
+      "zh": "Antigravity 认证失败",
+      "status": "已翻译"
+    },
+    {
+      "key": "quotaReasons.quota_fetch_failed",
+      "en": "quota fetch failed",
+      "zh": "额度获取失败",
+      "status": "已翻译"
+    }
+  ]
+}
