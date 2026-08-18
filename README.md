@@ -8,6 +8,10 @@
 本项目专注 Antigravity CLI 的终端界面，不修改 IDE 桌面壳。它采用机器可读翻译清单、
 版本锁定的精确偏移补丁、原子替换和真实 TUI 验收，便于 AI 持续定位、翻译、验证和升级。
 
+## 汉化效果
+
+![Antigravity CLI 汉化效果：命令名保持英文，右侧说明及快捷键提示为中文](assets/agy-cli-zh-preview.png)
+
 ## 架构概述
 
 AGY CLI 的显示来自 **三处**。本项目汉化 Go 二进制主体和已解包的内置 Skill
@@ -93,6 +97,8 @@ Antigravity-zh/
 ├── ARCHITECTURE.md              # 架构与汉化原理详解
 ├── SOP.md                       # 升级与维护流程
 ├── LICENSE                      # MIT License
+├── assets/
+│   └── agy-cli-zh-preview.png   # README 汉化效果图
 ├── i18n/
 │   ├── hud-translations.json    # HUD 可选实验翻译表
 │   ├── binary-translations.json # 二进制层翻译表（en → zh 对照）
