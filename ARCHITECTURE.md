@@ -143,9 +143,11 @@ macOS 直接 `SIGKILL`（退出码 137）。
 2. 通过 Go `pclntab` 恢复渲染函数地址，再由 arm64 反汇编确认字符串地址；
 3. 每条翻译记录精确文件偏移和预期英文原文，任一不匹配就整体失败；
 4. 中文 UTF-8 字节不得超过原字符串，剩余空间使用空格填充；
-5. 在同目录临时文件上 patch、签名和冒烟，全部通过后才原子替换 `agy`；
-6. patch 后使用 ad-hoc hardened-runtime 签名，Google 原签名版本保留在
-   `agy.zh-backup`，可一键恢复。
+5. 若当前文件已被后台增量更新为中英混合状态，则从清单固定的官方 HTTPS 发布包重新
+   取得原件，并校验归档 SHA-512、二进制 SHA-256、版本号和 Google Developer ID；
+6. 在同目录临时文件上 patch、签名和冒烟，全部通过后才原子替换 `agy`；
+7. patch 后使用 ad-hoc hardened-runtime 签名，Google 原签名版本按版本保留为
+   `agy.zh-backup-<version>`，可一键恢复；已有旧备份不会被覆盖。
 
 斜杠菜单中的普通命令说明来自二进制；`agy-customizations` 和
 `antigravity-guide` 两个系统 Skill 则从
@@ -175,7 +177,7 @@ macOS 直接 `SIGKILL`（退出码 137）。
 
 | 机制 | 说明 |
 |------|------|
-| 备份/恢复 | 保留 Google 原签名 `.zh-backup`，`--restore` 原子还原 |
+| 备份/恢复 | 按版本保留 Google 原签名 `.zh-backup-<version>`，`--restore` 原子还原 |
 | 版本锁定 | 版本、平台、SHA-256、逐条偏移四重校验 |
 | HUD 原版校验 | 同时检查插件源码与 `settings.json` 指向的已部署运行时 |
 | 失败关闭 | 任一二进制条目不匹配就拒绝整个 patch，不做部分安装 |

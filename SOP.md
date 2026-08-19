@@ -26,12 +26,13 @@ agy --version
 # 2. HUD 层：确认仍为上游原版
 bash scripts/patch_hud.sh --check-original
 
-# 3. 二进制层：先干跑；未知版本会因版本或 SHA-256 不同而安全拒绝
+# 3. 二进制层：先干跑；已适配版本会从官方原包重新验证，未知版本安全拒绝
 bash scripts/patch_binary.sh --dry-run
 
 # 如果这里失败，停止。不得复制旧偏移、跳过哈希或直接全局替换字符串。
 
-# 4. 维护者用 pclntab 和反汇编确认新偏移，更新翻译表后再安装
+# 4. 维护者用 pclntab 和反汇编确认新偏移，同时更新官方归档 URL、SHA-512、
+#    解包后 SHA-256 和版本号，再安装
 go run scripts/go_func_ranges.go ~/.local/bin/agy HintNavigate HintScrollPage
 bash scripts/patch_binary.sh
 bash scripts/patch_skill_descriptions.sh
@@ -47,7 +48,7 @@ bash scripts/patch_hud.sh --check-original
 # 2. 检查已部署 runtime 使用自动语言设置
 grep '"language": "auto"' ~/.gemini/antigravity-cli/agy-hud-runtime/runtime/agy-hud.config.json
 
-# 3. 二进制层：检查签名与 patch 状态
+# 3. 二进制层：检查签名与 patch 状态；后台升级后的中英混合文件会显示未知状态
 bash scripts/patch_binary.sh --status
 
 # 4. 内置 Skill：检查菜单说明状态
@@ -82,6 +83,7 @@ bash scripts/patch_binary.sh
 bash scripts/patch_skill_descriptions.sh
 
 # 3. 验证仓库一致性和真实安装
+python3 -m unittest discover -s tests -v
 bash scripts/smoke_test.sh
 git diff --check
 ```
@@ -92,7 +94,7 @@ git diff --check
 # 1. 查看当前状态；签名无效时脚本会明确报错
 bash scripts/patch_binary.sh --status
 
-# 2. 从 Google 原签名备份恢复
+# 2. 从当前清单版本的 Google 原签名备份恢复
 bash scripts/patch_binary.sh --restore
 
 # 3. 确认原版可启动后，再按当前清单重新安装

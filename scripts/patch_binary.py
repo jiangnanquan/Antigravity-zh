@@ -12,16 +12,25 @@ import platform
 import shutil
 import subprocess
 import sys
+import tarfile
 import tempfile
 
 
 TARGET = Path.home() / ".local" / "bin" / "agy"
-BACKUP = TARGET.with_name(f"{TARGET.name}.zh-backup")
+LEGACY_BACKUP = TARGET.with_name(f"{TARGET.name}.zh-backup")
 MANIFEST = Path(__file__).resolve().parent.parent / "i18n" / "binary-translations.json"
 
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def sha512(path: Path) -> str:
+    digest = hashlib.sha512()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
@@ -35,6 +44,16 @@ def run(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
 def load_manifest() -> dict:
     with MANIFEST.open(encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def backup_path(manifest: dict) -> Path:
+    version = manifest["_meta"]["agy_version"]
+    return TARGET.with_name(f"{TARGET.name}.zh-backup-{version}")
+
+
+def signature_details(path: Path) -> str:
+    details = run("codesign", "-dv", "--verbose=4", str(path), check=False)
+    return details.stdout + details.stderr
 
 
 def validate_source(path: Path, manifest: dict) -> None:
@@ -53,6 +72,58 @@ def validate_source(path: Path, manifest: dict) -> None:
     if version != manifest["_meta"]["agy_version"]:
         raise RuntimeError(f"版本不匹配：检测到 {version}，仅支持 {manifest['_meta']['agy_version']}")
     run("codesign", "--verify", "--deep", "--strict", str(path))
+    expected_authority = manifest["_meta"]["upstream"]["signing_authority"]
+    if expected_authority not in signature_details(path):
+        raise RuntimeError(f"签名来源不匹配：{path} 不是清单声明的 Google 原签名文件")
+
+
+def download_official_source(manifest: dict, work_dir: Path) -> Path:
+    upstream = manifest["_meta"]["upstream"]
+    url = upstream["url"]
+    if not url.startswith("https://"):
+        raise RuntimeError("官方发布地址必须使用 HTTPS")
+
+    archive = work_dir / "agy.tar.gz"
+    try:
+        run(
+            "curl",
+            "-fsSL",
+            "--proto",
+            "=https",
+            "--tlsv1.2",
+            "--output",
+            str(archive),
+            url,
+        )
+    except subprocess.CalledProcessError as error:
+        detail = (error.stderr or error.stdout or str(error)).strip()
+        raise RuntimeError(f"下载官方 AGY 失败：{detail}") from error
+
+    actual_archive_hash = sha512(archive)
+    expected_archive_hash = upstream["archive_sha512"]
+    if actual_archive_hash != expected_archive_hash:
+        raise RuntimeError(
+            f"官方归档 SHA-512 校验失败：读取到 {actual_archive_hash}，期望 {expected_archive_hash}"
+        )
+
+    member_name = upstream["archive_member"]
+    source = work_dir / "agy.official"
+    try:
+        with tarfile.open(archive, mode="r:gz") as bundle:
+            member = bundle.getmember(member_name)
+            if not member.isfile():
+                raise RuntimeError(f"官方归档成员不是普通文件：{member_name}")
+            extracted = bundle.extractfile(member)
+            if extracted is None:
+                raise RuntimeError(f"无法读取官方归档成员：{member_name}")
+            with extracted, source.open("wb") as output:
+                shutil.copyfileobj(extracted, output)
+    except (KeyError, OSError, tarfile.TarError) as error:
+        raise RuntimeError(f"解包官方 AGY 失败：{error}") from error
+
+    source.chmod(0o755)
+    validate_source(source, manifest)
+    return source
 
 
 def patch_bytes(source: Path, destination: Path, manifest: dict) -> None:
@@ -91,74 +162,91 @@ def verify_patched(path: Path, manifest: dict) -> None:
             raise RuntimeError(f"补丁验收失败：{item['context']}")
 
 
-def select_source(manifest: dict) -> Path:
-    """Choose the pristine source without overwriting a newer official AGY."""
+def select_existing_source(manifest: dict) -> Path | None:
+    """Choose a verified pristine source without overwriting any older backup."""
     expected_hash = manifest["_meta"]["sha256"]
     if TARGET.exists() and sha256(TARGET) == expected_hash:
         return TARGET
-    if not TARGET.exists():
-        return BACKUP
 
-    signature = run("codesign", "--verify", "--deep", "--strict", str(TARGET), check=False)
-    if signature.returncode != 0:
-        # Recovery path for the old unsafe patch whose invalid signature caused
-        # macOS to SIGKILL agy before it could print a version.
-        return BACKUP
+    if TARGET.exists():
+        signature = run("codesign", "--verify", "--deep", "--strict", str(TARGET), check=False)
+        if signature.returncode != 0:
+            raise RuntimeError("当前 agy 签名无效；拒绝自动覆盖，请先显式运行 --restore")
 
-    version = run(str(TARGET), "--version").stdout.strip()
-    if version != manifest["_meta"]["agy_version"]:
-        raise RuntimeError(
-            f"检测到新的官方或未知 agy 版本 {version!r}；拒绝使用旧备份覆盖，请先更新偏移表"
-        )
-    details = run("codesign", "-dvvv", str(TARGET), check=False)
-    signature_details = details.stdout + details.stderr
-    if "Signature=adhoc" in signature_details:
-        return BACKUP
-    raise RuntimeError(
-        "当前 agy 是同版本但 SHA-256 未识别的正式签名文件；拒绝使用旧备份覆盖"
-    )
+        version = run(str(TARGET), "--version").stdout.strip()
+        if version != manifest["_meta"]["agy_version"]:
+            raise RuntimeError(
+                f"检测到新的官方或未知 agy 版本 {version!r}；拒绝使用旧备份覆盖，请先更新偏移表"
+            )
+        if "Signature=adhoc" not in signature_details(TARGET):
+            raise RuntimeError(
+                "当前 agy 是同版本但 SHA-256 未识别的正式签名文件；拒绝使用旧备份覆盖"
+            )
+
+    current_backup = backup_path(manifest)
+    for candidate in (current_backup, LEGACY_BACKUP):
+        if candidate.exists() and sha256(candidate) == expected_hash:
+            validate_source(candidate, manifest)
+            return candidate
+    return None
 
 
 def apply_patch(dry_run: bool) -> None:
     manifest = load_manifest()
-    source = select_source(manifest)
-    if not source.exists():
-        raise RuntimeError("找不到与当前版本匹配的官方二进制或备份")
-    validate_source(source, manifest)
+    with tempfile.TemporaryDirectory(prefix="antigravity-zh-") as temp_dir:
+        work_dir = Path(temp_dir)
+        source = select_existing_source(manifest)
+        downloaded = source is None
+        if downloaded:
+            source = download_official_source(manifest, work_dir)
+        else:
+            validate_source(source, manifest)
 
-    if dry_run:
-        with tempfile.TemporaryDirectory(prefix="antigravity-zh-") as temp_dir:
-            staged = Path(temp_dir) / "agy"
+        if dry_run:
+            staged = work_dir / "agy.dry-run"
             patch_bytes(source, staged, manifest)
-        print(f"DRY-RUN PASS：{len(manifest['patches'])} 条精确偏移全部匹配")
-        return
+            origin = "（已校验官方下载原包）" if downloaded else ""
+            print(f"DRY-RUN PASS：{len(manifest['patches'])} 条精确偏移全部匹配{origin}")
+            return
 
-    if not BACKUP.exists():
-        shutil.copy2(source, BACKUP)
-    validate_source(BACKUP, manifest)
+        TARGET.parent.mkdir(parents=True, exist_ok=True)
+        current_backup = backup_path(manifest)
+        if not current_backup.exists():
+            file_descriptor, backup_name = tempfile.mkstemp(
+                prefix=f"{current_backup.name}.staged-", dir=TARGET.parent
+            )
+            os.close(file_descriptor)
+            staged_backup = Path(backup_name)
+            try:
+                shutil.copy2(source, staged_backup)
+                validate_source(staged_backup, manifest)
+                os.replace(staged_backup, current_backup)
+            finally:
+                staged_backup.unlink(missing_ok=True)
+        validate_source(current_backup, manifest)
 
-    TARGET.parent.mkdir(parents=True, exist_ok=True)
-    file_descriptor, staged_name = tempfile.mkstemp(prefix="agy.zh-staged-", dir=TARGET.parent)
-    os.close(file_descriptor)
-    staged = Path(staged_name)
-    try:
-        patch_bytes(BACKUP, staged, manifest)
-        run("codesign", "--force", "--sign", "-", "--options", "runtime", str(staged))
-        verify_patched(staged, manifest)
-        os.replace(staged, TARGET)
-    finally:
-        staged.unlink(missing_ok=True)
+        file_descriptor, staged_name = tempfile.mkstemp(prefix="agy.zh-staged-", dir=TARGET.parent)
+        os.close(file_descriptor)
+        staged = Path(staged_name)
+        try:
+            patch_bytes(current_backup, staged, manifest)
+            run("codesign", "--force", "--sign", "-", "--options", "runtime", str(staged))
+            verify_patched(staged, manifest)
+            os.replace(staged, TARGET)
+        finally:
+            staged.unlink(missing_ok=True)
     print(f"PATCH PASS：已应用 {len(manifest['patches'])} 条精确汉化并完成 ad-hoc 签名")
 
 
 def restore() -> None:
     manifest = load_manifest()
-    validate_source(BACKUP, manifest)
+    current_backup = backup_path(manifest)
+    validate_source(current_backup, manifest)
     file_descriptor, staged_name = tempfile.mkstemp(prefix="agy.zh-restore-", dir=TARGET.parent)
     os.close(file_descriptor)
     staged = Path(staged_name)
     try:
-        shutil.copy2(BACKUP, staged)
+        shutil.copy2(current_backup, staged)
         os.replace(staged, TARGET)
     finally:
         staged.unlink(missing_ok=True)
