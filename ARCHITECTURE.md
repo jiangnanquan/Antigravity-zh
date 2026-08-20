@@ -149,10 +149,10 @@ macOS 直接 `SIGKILL`（退出码 137）。
 7. patch 后使用 ad-hoc hardened-runtime 签名，Google 原签名版本按版本保留为
    `agy.zh-backup-<version>`，可一键恢复；已有旧备份不会被覆盖。
 
-斜杠菜单中的普通命令说明来自二进制；`agy-customizations` 和
-`antigravity-guide` 两个系统 Skill 则从
+斜杠菜单中的普通命令说明来自二进制；`agy-customizations`、
+`antigravity-guide` 和 `migrate-workflows` 等系统 Skill 则从
 `~/.gemini/antigravity-cli/builtin/skills/` 的已解包 `SKILL.md` 读取。
-`patch_skill_descriptions.sh` 只替换这两个文件的 YAML `description`，保留正文与
+`patch_skill_descriptions.sh` 只替换清单声明文件的 YAML `description`，保留正文与
 独立备份，避免把 Skill 正文误当成菜单说明整体翻译。
 
 这不是完整的上游国际化框架。超过原字节长度、无法唯一定位或尚未经过真实界面确认的

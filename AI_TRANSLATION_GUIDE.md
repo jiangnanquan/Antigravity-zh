@@ -7,7 +7,7 @@
 | 界面文本 | 来源 | 处理方式 |
 |---|---|---|
 | 斜杠命令右侧说明、TUI 标签、权限和工具状态 | Go 二进制只读数据段 | 添加精确偏移记录 |
-| `/agy-customizations`、`/antigravity-guide` 右侧说明 | 已解包内置 `SKILL.md` 的 YAML `description` | 添加精确文本记录 |
+| 系统内置 Skill 的右侧说明 | 已解包内置 `SKILL.md` 的 YAML `description` | 添加精确文本记录 |
 | 底部状态栏 | `agy-hud` JavaScript 插件 | 默认不汉化 |
 
 无法确认来源时先用真实 TUI 复现，再定位；不要猜测。
