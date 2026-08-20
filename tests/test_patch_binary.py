@@ -29,8 +29,8 @@ class SourceSelectionTests(unittest.TestCase):
         self.legacy_backup = self.root / "agy.zh-backup"
         self.manifest = {
             "_meta": {
-                "agy_version": "1.1.14",
-                "sha256": digest(b"official-1.1.14"),
+                "agy_version": "1.1.15",
+                "sha256": digest(b"official-1.1.15"),
             }
         }
 
@@ -45,31 +45,31 @@ class SourceSelectionTests(unittest.TestCase):
         )
 
     def test_newer_target_is_rejected_before_old_backup(self) -> None:
-        self.target.write_bytes(b"newer-1.1.15")
-        versioned_backup = self.root / "agy.zh-backup-1.1.14"
-        versioned_backup.write_bytes(b"official-1.1.14")
+        self.target.write_bytes(b"newer-1.1.16")
+        versioned_backup = self.root / "agy.zh-backup-1.1.15"
+        versioned_backup.write_bytes(b"official-1.1.15")
+
+        def fake_run(*args: str, check: bool = True):
+            if args[:4] == ("codesign", "--verify", "--deep", "--strict"):
+                return subprocess.CompletedProcess(args, 0, "", "")
+            if args == (str(self.target), "--version"):
+                return subprocess.CompletedProcess(args, 0, "1.1.16\n", "")
+            raise AssertionError(f"unexpected command: {args}")
+
+        with self.patch_paths(), mock.patch.object(patch_binary, "run", side_effect=fake_run):
+            with self.assertRaisesRegex(RuntimeError, "1.1.16"):
+                patch_binary.select_existing_source(self.manifest)
+
+    def test_supported_adhoc_target_uses_versioned_pristine_backup(self) -> None:
+        self.target.write_bytes(b"localized-1.1.15")
+        versioned_backup = self.root / "agy.zh-backup-1.1.15"
+        versioned_backup.write_bytes(b"official-1.1.15")
 
         def fake_run(*args: str, check: bool = True):
             if args[:4] == ("codesign", "--verify", "--deep", "--strict"):
                 return subprocess.CompletedProcess(args, 0, "", "")
             if args == (str(self.target), "--version"):
                 return subprocess.CompletedProcess(args, 0, "1.1.15\n", "")
-            raise AssertionError(f"unexpected command: {args}")
-
-        with self.patch_paths(), mock.patch.object(patch_binary, "run", side_effect=fake_run):
-            with self.assertRaisesRegex(RuntimeError, "1.1.15"):
-                patch_binary.select_existing_source(self.manifest)
-
-    def test_supported_adhoc_target_uses_versioned_pristine_backup(self) -> None:
-        self.target.write_bytes(b"localized-1.1.14")
-        versioned_backup = self.root / "agy.zh-backup-1.1.14"
-        versioned_backup.write_bytes(b"official-1.1.14")
-
-        def fake_run(*args: str, check: bool = True):
-            if args[:4] == ("codesign", "--verify", "--deep", "--strict"):
-                return subprocess.CompletedProcess(args, 0, "", "")
-            if args == (str(self.target), "--version"):
-                return subprocess.CompletedProcess(args, 0, "1.1.14\n", "")
             raise AssertionError(f"unexpected command: {args}")
 
         with (
@@ -85,8 +85,8 @@ class SourceSelectionTests(unittest.TestCase):
 
     def test_invalid_current_signature_requires_explicit_restore(self) -> None:
         self.target.write_bytes(b"damaged")
-        versioned_backup = self.root / "agy.zh-backup-1.1.14"
-        versioned_backup.write_bytes(b"official-1.1.14")
+        versioned_backup = self.root / "agy.zh-backup-1.1.15"
+        versioned_backup.write_bytes(b"official-1.1.15")
         failed = subprocess.CompletedProcess(("codesign",), 1, "", "invalid signature")
 
         with self.patch_paths(), mock.patch.object(patch_binary, "run", return_value=failed):
@@ -105,6 +105,58 @@ class ManifestContractTests(unittest.TestCase):
                 len(item["en"].encode("utf-8")),
                 item["context"],
             )
+
+    def test_settings_surface_has_labels_descriptions_and_display_values(self) -> None:
+        manifest = json.loads((ROOT / "i18n" / "binary-translations.json").read_text())
+        settings_items = {
+            item["en"]: item for item in manifest["patches"]
+            if item["context"].startswith("/settings")
+        }
+
+        labels = {
+            "Agent Mode",
+            "Animation Speed",
+            "Artifact Review",
+            "Color Scheme",
+            "Copy on Select",
+            "Editor",
+            "Editor Mode",
+            "Enable Telemetry",
+            "Non-Workspace Access",
+            "Notifications",
+            "Rendering Mode",
+            "Sandbox Mode",
+            "Show Active Tasks",
+            "Show Feedback Survey",
+            "Show Tips",
+            "Tool Permission",
+            "Use AI Credits",
+            "Verbosity",
+        }
+        descriptions = {
+            item["context"] for item in manifest["patches"]
+            if item["context"].startswith("/settings")
+            and item["context"].endswith("说明")
+            and "快捷键" not in item["context"]
+        }
+
+        self.assertTrue(labels.issubset(settings_items))
+        self.assertEqual(len(descriptions), 17)
+        self.assertIn("asks for review", settings_items)
+        self.assertIn("native terminal (inline)", settings_items)
+        self.assertIn("Save", settings_items)
+        self.assertIn("Cancel", settings_items)
+
+        config_tokens = {
+            "default",
+            "on",
+            "off",
+            "fast",
+            "high",
+            "always-proceed",
+            "colorblind-friendly light",
+        }
+        self.assertTrue(config_tokens.isdisjoint(settings_items))
 
 
 if __name__ == "__main__":
