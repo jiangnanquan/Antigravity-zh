@@ -155,6 +155,11 @@ macOS 直接 `SIGKILL`（退出码 137）。
 `patch_skill_descriptions.sh` 只替换清单声明文件的 YAML `description`，保留正文与
 独立备份，避免把 Skill 正文误当成菜单说明整体翻译。
 
+`/usage` 是混合来源：标题、账户标签、额度状态、刷新格式、AI 点数说明和底部
+`scrollPanelHints` 来自 Go 二进制，可按精确偏移处理；分组名、额度周期名、组内模型说明
+和总说明由服务端 `QuotaSummaryGroup/QuotaSummaryBucket` 的 `display_name`、
+`description` 返回。后者不存在于本地只读字符串段，当前实现保持原文，不修改网络协议。
+
 这不是完整的上游国际化框架。超过原字节长度、无法唯一定位或尚未经过真实界面确认的
 文本会保留英文，安全性优先于覆盖率。
 

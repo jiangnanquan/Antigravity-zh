@@ -17,6 +17,12 @@
       "context": "/antigravity-guide 右侧说明"
     },
     {
+      "path": "skills/generative_ui/SKILL.md",
+      "en": "description: How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
+      "zh": "description: 在聊天中内联渲染丰富的交互式 HTML 组件，或作为独立产物展示。当你需要向用户呈现图表、数据可视化、交互控件、教学演示，或任何超越纯文本和 Markdown 的丰富视觉内容时使用此技能。",
+      "context": "/generative_ui 右侧说明"
+    },
+    {
       "path": "skills/migrate-workflows/SKILL.md",
       "en": "description: Automatically migrate legacy workflows (.agents/workflows/ or ~/.gemini/config/workflows/) to skills (.agents/skills/ or ~/.gemini/config/skills/). Scans for existing workflows, creates target SKILL.md files, and archives old workflow files.",
       "zh": "description: 自动将旧工作流（.agents/workflows/ 或 ~/.gemini/config/workflows/）迁移为技能（.agents/skills/ 或 ~/.gemini/config/skills/）。扫描现有工作流，创建目标 SKILL.md 文件，并归档旧工作流。",

@@ -1,695 +1,815 @@
 {
   "_meta": {
-    "description": "agy 1.1.16 macOS arm64 精确偏移汉化表",
-    "agy_version": "1.1.16",
+    "description": "agy 1.1.17 macOS arm64 精确偏移汉化表",
+    "agy_version": "1.1.17",
     "platform": "darwin-arm64",
-    "sha256": "095705beb4e4591c8ee7f8b6261473e15228f0f4b1bec58c62c966a6d4bfab30",
+    "sha256": "f2eacff7d849dc588b171d5e82088191debb86367e5574fd13142d3f03293244",
     "signing": "补丁后使用 ad-hoc hardened runtime 签名；原 Google 签名按版本保留",
     "upstream": {
-      "url": "https://storage.googleapis.com/antigravity-public/antigravity-cli/1.1.16-6607970839166976/darwin-arm/cli_mac_arm64.tar.gz",
-      "archive_sha512": "fa3a94a7d9d96cb367bf643ecf0da3b4d6b45f3e390ec6db1d699fdac4f7750894617152fc3c1695712a36eee926fff4f00ff4a44d372b3f604cfc9ec6fdbea6",
+      "url": "https://storage.googleapis.com/antigravity-public/antigravity-cli/1.1.17-5084709148033024/darwin-arm/cli_mac_arm64.tar.gz",
+      "archive_sha512": "eda17e9f3649df12bcd614e226983922cd5e4c22a9153e9f9a5ecc5557addcda0f03147db8a2c6c19daeb8e1dc8062a9a1bcf86284315c2b1aae73f2d8236b1e",
       "archive_member": "antigravity",
       "signing_authority": "Authority=Developer ID Application: Google LLC (EQHXZ8M8AV)"
     }
   },
   "patches": [
     {
-      "offset": "0x02b6dd58",
+      "offset": "0x02b71e98",
       "en": "Select",
       "zh": "选择",
       "context": "选择快捷键提示"
     },
     {
-      "offset": "0x02b94507",
+      "offset": "0x02b9864f",
       "en": "Complete",
       "zh": "补全",
       "context": "补全快捷键提示"
     },
     {
-      "offset": "0x02b9450f",
+      "offset": "0x02b98657",
       "en": "Navigate",
       "zh": "导航",
       "context": "导航快捷键提示"
     },
     {
-      "offset": "0x02b945af",
+      "offset": "0x02b986ef",
       "en": "Settings",
       "zh": "设置",
       "context": "/settings 面板标题"
     },
     {
-      "offset": "0x02bc2a25",
+      "offset": "0x02bc6b65",
       "en": "Search:",
       "zh": "搜索:",
       "context": "/settings 搜索标签"
     },
     {
-      "offset": "0x02c5b592",
+      "offset": "0x02c5f6fc",
       "en": "type to filter...",
       "zh": "输入筛选...",
       "context": "/settings 搜索输入提示"
     },
     {
-      "offset": "0x02c5b5a3",
+      "offset": "0x02c5f70d",
       "en": "Clear Search/Exit",
       "zh": "清除/退出",
       "context": "/settings 清除搜索或退出快捷键说明"
     },
     {
-      "offset": "0x02b563b9",
+      "offset": "0x02b5a4f9",
       "en": "Save",
       "zh": "存",
       "context": "/settings 保存选项快捷键说明"
     },
     {
-      "offset": "0x02b6dc26",
+      "offset": "0x02b71d66",
       "en": "Cancel",
       "zh": "取消",
       "context": "/settings 取消选项快捷键说明"
     },
     {
-      "offset": "0x02bc2ab0",
+      "offset": "0x02bc6bf0",
       "en": "(current)",
       "zh": "当前",
       "context": "/settings 选项当前值标记"
     },
     {
-      "offset": "0x02bc2aeb",
+      "offset": "0x02bc6c2b",
       "en": "Agent Mode",
       "zh": "代理",
       "context": "/settings 代理模式标签"
     },
     {
-      "offset": "0x02c358ba",
+      "offset": "0x02c39a22",
       "en": "Animation Speed",
       "zh": "动画速度",
       "context": "/settings 动画速度标签"
     },
     {
-      "offset": "0x02c358ab",
+      "offset": "0x02c39a13",
       "en": "Artifact Review",
       "zh": "产物审查",
       "context": "/settings 产物审查标签"
     },
     {
-      "offset": "0x02bf5492",
+      "offset": "0x02bf95de",
       "en": "Color Scheme",
       "zh": "配色方案",
       "context": "/settings 配色方案标签"
     },
     {
-      "offset": "0x02c21f2c",
+      "offset": "0x02c26085",
       "en": "Copy on Select",
       "zh": "选择复制",
       "context": "/settings 选择复制标签"
     },
     {
-      "offset": "0x02b6dd88",
+      "offset": "0x02b71ec8",
       "en": "Editor",
       "zh": "编辑",
       "context": "/settings 编辑器标签"
     },
     {
-      "offset": "0x02bdbf3c",
+      "offset": "0x02be007c",
       "en": "Editor Mode",
       "zh": "编辑态",
       "context": "/settings 编辑器模式标签"
     },
     {
-      "offset": "0x02c48d9d",
+      "offset": "0x02c4cef6",
       "en": "Enable Telemetry",
       "zh": "启用遥测",
       "context": "/settings 遥测标签"
     },
     {
-      "offset": "0x02c8d356",
+      "offset": "0x02c914f7",
       "en": "Non-Workspace Access",
       "zh": "工作区外访问",
       "context": "/settings 工作区外访问标签"
     },
     {
-      "offset": "0x02c0c368",
+      "offset": "0x02c104c1",
       "en": "Notifications",
       "zh": "通知",
       "context": "/settings 通知标签"
     },
     {
-      "offset": "0x02c21f1e",
+      "offset": "0x02c26077",
       "en": "Rendering Mode",
       "zh": "渲染模式",
       "context": "/settings 渲染模式标签"
     },
     {
-      "offset": "0x02bf549e",
+      "offset": "0x02bf95ea",
       "en": "Sandbox Mode",
       "zh": "沙箱模式",
       "context": "/settings 沙箱模式标签"
     },
     {
-      "offset": "0x02c5b61a",
+      "offset": "0x02c5f784",
       "en": "Show Active Tasks",
       "zh": "显示任务",
       "context": "/settings 显示活跃任务标签"
     },
     {
-      "offset": "0x02c8d676",
+      "offset": "0x02c91817",
       "en": "Show Feedback Survey",
       "zh": "显示反馈调查",
       "context": "/settings 显示反馈调查标签"
     },
     {
-      "offset": "0x02baaea4",
+      "offset": "0x02baefe4",
       "en": "Show Tips",
       "zh": "提示",
       "context": "/settings 显示提示标签"
     },
     {
-      "offset": "0x02c35572",
+      "offset": "0x02c396da",
       "en": "Tool Permission",
       "zh": "工具权限",
       "context": "/settings 工具权限标签"
     },
     {
-      "offset": "0x02c21ed8",
+      "offset": "0x02c26031",
       "en": "Use AI Credits",
       "zh": "AI 点数",
       "context": "/settings AI 点数标签"
     },
     {
-      "offset": "0x02baaead",
+      "offset": "0x02baefed",
       "en": "Verbosity",
       "zh": "详细度",
       "context": "/settings 详细度标签"
     },
     {
-      "offset": "0x02de0b80",
+      "offset": "0x02de4f7f",
       "en": "'default': standard behavior. 'accept-edits': auto-approve file edits, prompt for commands. 'plan': research and plan without making changes",
       "zh": "'default': 标准行为；'accept-edits': 自动批准文件编辑，命令仍需确认；'plan': 只调研规划，不作改动",
       "context": "/settings 代理模式说明"
     },
     {
-      "offset": "0x02d3af6b",
+      "offset": "0x02d3f15f",
       "en": "Speed of the running light animation",
       "zh": "运行指示灯动画速度",
       "context": "/settings 动画速度说明"
     },
     {
-      "offset": "0x02deec98",
+      "offset": "0x02df3131",
       "en": "Specifies Agent's behavior when asking for review on artifacts. 'always proceeds': Agent never asks (maximizes autonomy, risk of unsafe content). 'agent decides': Agent decides based on complexity. 'asks for review': Agent always asks for review.",
       "zh": "指定代理请求产物审查的方式。'always proceeds': 从不询问（自主性最高，存在不安全内容风险）；'agent decides': 代理按复杂度决定；'asks for review': 始终请求审查。",
       "context": "/settings 产物审查说明"
     },
     {
-      "offset": "0x02dd8f47",
+      "offset": "0x02ddd346",
       "en": "When enabled, releasing a mouse text selection copies it to the system clipboard. Only active in alt-screen mode.",
       "zh": "启用后，松开鼠标文本选择即复制到系统剪贴板。仅在全屏模式下生效。",
       "context": "/settings 选择复制说明"
     },
     {
-      "offset": "0x02d4805f",
+      "offset": "0x02d4c253",
       "en": "Preferred editor for viewing artifacts",
       "zh": "查看产物的首选编辑器",
       "context": "/settings 编辑器说明"
     },
     {
-      "offset": "0x02d81fb9",
+      "offset": "0x02d862e2",
       "en": "Configure how you edit the prompt (default or vim)",
       "zh": "提示词编辑方式（default 或 vim）",
       "context": "/settings 编辑器模式说明"
     },
     {
-      "offset": "0x02dcd2ad",
+      "offset": "0x02dd16ac",
       "en": "When toggled on, %s collects usage data to help Google enhance performance and features",
       "zh": "启用后，%s 会收集使用数据，帮助 Google 改进性能和功能",
       "context": "/settings 遥测说明"
     },
     {
-      "offset": "0x02d98e48",
+      "offset": "0x02d9d247",
       "en": "Allow agent to access files outside workspace directories",
       "zh": "允许代理访问工作区目录之外的文件",
       "context": "/settings 工作区外访问说明"
     },
     {
-      "offset": "0x02db75f2",
+      "offset": "0x02dbb9f1",
       "en": "Bell + desktop notification on tool confirmation and agent completion",
       "zh": "工具确认和代理完成时响铃并发送桌面通知",
       "context": "/settings 通知说明"
     },
     {
-      "offset": "0x02defd71",
+      "offset": "0x02df420a",
       "en": "no flickering (altscreen) is ideal for long conversations but requires holding Shift/Option for native text selection. Native Terminal experience (inline) preserves native terminal behavior but may truncate long conversations and flicker when toggling views.",
       "zh": "“无闪烁（全屏）”适合长对话，但原生文本选择需按住 Shift/Option。“原生终端（内联）”保留终端原生行为，但长对话可能被截断，切换视图时可能闪烁。",
       "context": "/settings 渲染模式说明"
     },
     {
-      "offset": "0x02d48085",
+      "offset": "0x02d4c279",
       "en": "Enables terminal sandbox restrictions.",
       "zh": "启用终端沙箱限制。",
       "context": "/settings 沙箱模式说明"
     },
     {
-      "offset": "0x02da6f38",
+      "offset": "0x02dab337",
       "en": "Show active subagents and background tasks below the input box",
       "zh": "在输入框下方显示活跃子代理和后台任务",
       "context": "/settings 显示活跃任务说明"
     },
     {
-      "offset": "0x02c8d68a",
+      "offset": "0x02c9182b",
       "en": "Show feedback survey",
       "zh": "显示反馈调查",
       "context": "/settings 显示反馈调查说明"
     },
     {
-      "offset": "0x02d7639c",
+      "offset": "0x02d7a693",
       "en": "Show helpful tips while the agent is generating",
       "zh": "代理生成时显示实用提示",
       "context": "/settings 显示提示说明"
     },
     {
-      "offset": "0x02dbccec",
+      "offset": "0x02dc10eb",
       "en": "Controls whether terminal commands require your approval before running.",
       "zh": "控制终端命令运行前是否需要你的批准。",
       "context": "/settings 工具权限说明"
     },
     {
-      "offset": "0x02db2f5e",
+      "offset": "0x02db735d",
       "en": "Use your AI credits for model calls once your plan's quota runs out",
       "zh": "套餐额度用完后，使用 AI 点数调用模型",
       "context": "/settings AI 点数说明"
     },
     {
-      "offset": "0x02ddac12",
+      "offset": "0x02ddf011",
       "en": "Show less of the work and more of the communication the agent wants you to know by displaying fewer tools and thoughts",
       "zh": "少显示工具和思考过程，多展示代理希望你了解的信息",
       "context": "/settings 详细度说明"
     },
     {
-      "offset": "0x02c358c9",
+      "offset": "0x02c39a31",
       "en": "always proceeds",
       "zh": "始终继续",
       "context": "/settings 产物审查选项"
     },
     {
-      "offset": "0x02c0c375",
+      "offset": "0x02c104ce",
       "en": "agent decides",
       "zh": "代理决定",
       "context": "/settings 产物审查选项"
     },
     {
-      "offset": "0x02c358d8",
+      "offset": "0x02c39a40",
       "en": "asks for review",
       "zh": "请求审查",
       "context": "/settings 产物审查选项"
     },
     {
-      "offset": "0x02cca699",
+      "offset": "0x02cce869",
       "en": "native terminal (inline)",
       "zh": "原生终端（内联）",
       "context": "/settings 原生终端渲染选项"
     },
     {
-      "offset": "0x02cd6ddd",
+      "offset": "0x02cdafad",
       "en": "no flickering (altscreen)",
       "zh": "无闪烁（全屏）",
       "context": "/settings 无闪烁渲染选项"
     },
     {
-      "offset": "0x02b9449f",
+      "offset": "0x02b985e7",
       "en": "other...",
       "zh": "其他",
       "context": "/settings 其他编辑器选项"
     },
     {
-      "offset": "0x02bf514a",
+      "offset": "0x02bf9296",
       "en": "Pending edit",
       "zh": "待编辑",
       "context": "编辑等待状态"
     },
     {
-      "offset": "0x02c0b65b",
+      "offset": "0x02c0f7a7",
       "en": "Editing files",
       "zh": "编辑文件",
       "context": "文件编辑工具状态"
     },
     {
-      "offset": "0x02bf46ca",
+      "offset": "0x02bf880a",
       "en": "Reading file",
       "zh": "读取文件",
       "context": "读取工具状态"
     },
     {
-      "offset": "0x02bf52fb",
+      "offset": "0x02bf9447",
       "en": "Thinking...",
       "zh": "思考...",
       "context": "模型思考状态"
     },
     {
-      "offset": "0x02bf5308",
+      "offset": "0x02bf9454",
       "en": "No results",
       "zh": "无结果",
       "context": "空搜索结果"
     },
     {
-      "offset": "0x02bf5312",
+      "offset": "0x02bf945e",
       "en": "System files",
       "zh": "系统文件",
       "context": "系统文件分组"
     },
     {
-      "offset": "0x02bf531e",
+      "offset": "0x02bf946a",
       "en": "No steps yet",
       "zh": "暂无步骤",
       "context": "空步骤列表"
     },
     {
-      "offset": "0x02bf532a",
+      "offset": "0x02bf9476",
       "en": "System tools",
       "zh": "系统工具",
       "context": "系统工具分组"
     },
     {
-      "offset": "0x02bf5462",
+      "offset": "0x02bf95ae",
       "en": "Yes, approve",
       "zh": "是，批准",
       "context": "权限确认选项"
     },
     {
-      "offset": "0x02bf54aa",
+      "offset": "0x02bf95f6",
       "en": "%s to cancel",
       "zh": "%s 取消",
       "context": "取消快捷键提示"
     },
     {
-      "offset": "0x02caeef6",
+      "offset": "0x02cb3097",
       "en": "No, reject",
       "zh": "否,拒绝",
       "context": "权限拒绝选项"
     },
     {
-      "offset": "0x02cbb8ed",
+      "offset": "0x02cbfa8e",
       "en": "Available subcommands:",
       "zh": "可用子命令：",
       "context": "命令行帮助子命令标题"
     },
     {
-      "offset": "0x02ce340f",
+      "offset": "0x02ce75df",
       "en": "to auto-approve file edits",
       "zh": "自动批准文件编辑",
       "context": "自动批准快捷键提示"
     },
     {
-      "offset": "0x02d5949b",
+      "offset": "0x02d5d68d",
       "en": "⚠ alt screen unavailable — run ssh -t",
       "zh": "⚠ 全屏不可用 — 请运行 ssh -t",
       "context": "全屏模式不可用提示"
     },
     {
-      "offset": "0x02d639c4",
+      "offset": "0x02d67c0a",
       "en": "⚠ terminal %q does not support alt screen",
       "zh": "⚠ 终端 %q 不支持全屏",
       "context": "终端不支持全屏提示"
     },
     {
-      "offset": "0x02d1d7bc",
+      "offset": "0x02d2198c",
       "en": "Add a directory to the workspace",
       "zh": "将目录添加到工作区",
       "context": "/add-dir 命令说明（位置一）"
     },
     {
-      "offset": "0x02d6b6b0",
+      "offset": "0x02d6f97a",
       "en": "Add a directory to the workspace",
       "zh": "将目录添加到工作区",
       "context": "/add-dir 命令说明（位置二）"
     },
     {
-      "offset": "0x02cf92e2",
+      "offset": "0x02cfd4b2",
       "en": "List available custom agents",
       "zh": "列出可用自定义代理",
       "context": "/agents 命令说明"
     },
     {
-      "offset": "0x02cd6d92",
+      "offset": "0x02cdaf62",
       "en": "View and review artifacts",
       "zh": "查看并审查产物",
       "context": "/artifact 命令说明（位置一）"
     },
     {
-      "offset": "0x02d59190",
+      "offset": "0x02d5d382",
       "en": "View and review artifacts",
       "zh": "查看并审查产物",
       "context": "/artifact 命令说明（位置二）"
     },
     {
-      "offset": "0x02d98dd6",
+      "offset": "0x02d9d1d5",
       "en": "Ask a side question without interrupting the current task",
       "zh": "提出旁支问题，不中断当前任务",
       "context": "/btw 命令说明"
     },
     {
-      "offset": "0x02d0c7bf",
+      "offset": "0x02d1098f",
       "en": "Show release notes and changes",
       "zh": "显示发行说明和变更",
       "context": "/changelog 命令说明"
     },
     {
-      "offset": "0x02d47f09",
+      "offset": "0x02d4c0fd",
       "en": "Clear conversation and start a new one",
       "zh": "清除对话并新建对话",
       "context": "/clear 命令说明"
     },
     {
-      "offset": "0x02d98e0f",
+      "offset": "0x02d9d20e",
       "en": "Search code in the workspace (usage: /codesearch <query>)",
       "zh": "在工作区搜代码 (用法: /codesearch <query>)",
       "context": "/codesearch 命令说明"
     },
     {
-      "offset": "0x02c7d6c4",
+      "offset": "0x02c81851",
       "en": "Open settings panel",
       "zh": "打开设置面板",
       "context": "/config 命令说明"
     },
     {
-      "offset": "0x02d1539f",
+      "offset": "0x02d1956f",
       "en": "Visualize current context usage",
       "zh": "查看当前上下文用量",
       "context": "/context 命令说明"
     },
     {
-      "offset": "0x02de1a67",
+      "offset": "0x02de5e66",
       "en": "Copy the last planner response to the clipboard, or the n-th most recent with '/copy n' (may require allowing clipboard access in your terminal)",
       "zh": "将最近一次规划回复复制到剪贴板；用 '/copy n' 可复制倒数第 n 条（终端可能要求剪贴板权限）",
       "context": "/copy 命令说明"
     },
     {
-      "offset": "0x02d63897",
+      "offset": "0x02d67add",
       "en": "Show remaining G1 credits and purchase link",
       "zh": "显示剩余 G1 点数及购买链接",
       "context": "/credits 命令说明"
     },
     {
-      "offset": "0x02d638c2",
+      "offset": "0x02d67b08",
       "en": "View uncommitted changes and per-turn diffs",
       "zh": "查看未提交更改及每轮差异",
       "context": "/diff 命令说明"
     },
     {
-      "offset": "0x02cca621",
+      "offset": "0x02cce7f1",
       "en": "Set the reasoning effort",
       "zh": "设置推理强度",
       "context": "/effort 命令说明"
     },
     {
-      "offset": "0x02bf523a",
+      "offset": "0x02bf9386",
       "en": "Exit the CLI",
       "zh": "退出 CLI",
       "context": "/exit 命令说明"
     },
     {
-      "offset": "0x02d79db9",
+      "offset": "0x02d7e0b0",
       "en": "Submit qualitative feedback to improve the agent",
       "zh": "提交体验反馈，帮助改进代理",
       "context": "/feedback 命令说明"
     },
     {
-      "offset": "0x02dd620d",
+      "offset": "0x02dda60c",
       "en": "Create a branch of the current conversation at this point, optionally specifying a project ID to fork into",
       "zh": "在此处创建当前对话分支，可指定要分叉到的项目 ID",
       "context": "/fork 命令说明"
     },
     {
-      "offset": "0x02d4dd48",
+      "offset": "0x02d51f63",
       "en": "Show available commands and keybindings",
       "zh": "显示可用命令和快捷键",
       "context": "/help 命令说明"
     },
     {
-      "offset": "0x02d5e66f",
+      "offset": "0x02d6288a",
       "en": "Manage hook configurations for tool events",
       "zh": "管理工具事件的钩子配置",
       "context": "/hooks 命令说明"
     },
     {
-      "offset": "0x02caed6a",
+      "offset": "0x02cb2f0b",
       "en": "Set custom keybindings",
       "zh": "自定义快捷键",
       "context": "/keybindings 命令说明"
     },
     {
-      "offset": "0x02b7e811",
+      "offset": "0x02b82951",
       "en": "Log out",
       "zh": "登出",
       "context": "/logout 命令说明（位置一）"
     },
     {
-      "offset": "0x02c36752",
+      "offset": "0x02c3a8ab",
       "en": "Log out",
       "zh": "登出",
       "context": "/logout 命令说明（位置二）"
     },
     {
-      "offset": "0x02c45742",
+      "offset": "0x02c4989b",
       "en": "Log out",
       "zh": "登出",
       "context": "/logout 命令说明（位置三）"
     },
     {
-      "offset": "0x02c6ca20",
+      "offset": "0x02c70bad",
       "en": "Manage MCP servers",
       "zh": "MCP 服务管理",
       "context": "/mcp 命令说明"
     },
     {
-      "offset": "0x02bdbd8f",
+      "offset": "0x02bdfecf",
       "en": "Set a model",
       "zh": "选模型",
       "context": "/model 命令说明"
     },
     {
-      "offset": "0x02d4dd6f",
+      "offset": "0x02d51f8a",
       "en": "Open a file or view opened/edited files",
       "zh": "打开或查看已编辑文件",
       "context": "/open 命令说明"
     },
     {
-      "offset": "0x02cbd8ba",
+      "offset": "0x02cc1a5b",
       "en": "Manage tool permissions",
       "zh": "管理工具权限",
       "context": "/permissions 命令说明"
     },
     {
-      "offset": "0x02d153dd",
+      "offset": "0x02d195ad",
       "en": "Rename the current conversation",
       "zh": "重命名当前对话",
       "context": "/rename 命令说明"
     },
     {
-      "offset": "0x02d3ad73",
+      "offset": "0x02d3ef67",
       "en": "Browse and resume past conversations",
       "zh": "浏览并恢复历史对话",
       "context": "/resume 命令说明"
     },
     {
-      "offset": "0x02d593ce",
+      "offset": "0x02d5d5c0",
       "en": "Rewind conversation to a previous message",
       "zh": "将对话回退到之前的消息",
       "context": "/rewind 命令说明"
     },
     {
-      "offset": "0x02c9d5bb",
+      "offset": "0x02ca175c",
       "en": "List available skills",
       "zh": "列出可用技能",
       "context": "/skills 命令说明"
     },
     {
-      "offset": "0x02c9d5d0",
+      "offset": "0x02ca1771",
       "en": "Toggle the statusline",
       "zh": "切换状态栏",
       "context": "/statusline 命令说明"
     },
     {
-      "offset": "0x02c9d5fa",
+      "offset": "0x02ca179b",
       "en": "View background tasks",
       "zh": "查看后台任务",
       "context": "/tasks 命令说明"
     },
     {
-      "offset": "0x02d33fdf",
+      "offset": "0x02d381d3",
       "en": "Toggle custom terminal window title",
       "zh": "切换自定义终端标题",
       "context": "/title 命令说明"
     },
     {
-      "offset": "0x02caedac",
+      "offset": "0x02cb2f4d",
       "en": "View model quota usage",
       "zh": "查看模型额度",
       "context": "/usage 命令说明"
     },
     {
-      "offset": "0x02da67f4",
+      "offset": "0x02daabf3",
       "en": "Invoke a team of agents to autonomously tackle large projects.",
       "zh": "调用代理团队自主处理大型项目。",
       "context": "/teamwork-preview 命令说明"
     },
     {
-      "offset": "0x02d4d2c5",
+      "offset": "0x02d514e0",
       "en": "Plan carefully before executing a task.",
       "zh": "执行任务前先仔细规划。",
       "context": "/plan 技能说明"
     },
     {
-      "offset": "0x02d1cd7c",
+      "offset": "0x02d20f4c",
       "en": "Interview me to align on a plan.",
       "zh": "访谈对齐方案。",
       "context": "/grill-me 技能说明"
     },
     {
-      "offset": "0x02dc6912",
+      "offset": "0x02dcad11",
       "en": "Reflect on recent successes or corrections to capture reusable skills or rules.",
       "zh": "复盘近期成功经验或纠正事项，沉淀可复用技能或规则。",
       "context": "/learn 技能说明"
     },
     {
-      "offset": "0x02f2cfaf",
+      "offset": "0x02f32a07",
       "en": "Comprehensive guide and reference for the Antigravity Customization System.",
       "zh": "Antigravity 自定义系统完整指南与参考。",
       "context": "/agy-customizations 技能说明第一行"
     },
     {
-      "offset": "0x02f2cffd",
+      "offset": "0x02f32a55",
       "en": "Use to explain how customizations work, their loading priority, discovery mechanisms,",
       "zh": "介绍自定义机制、加载优先级和发现方式，",
       "context": "/agy-customizations 技能说明第二行"
     },
     {
-      "offset": "0x02f2d055",
+      "offset": "0x02f32aad",
       "en": "and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
       "zh": "并指导创建技能、规则、插件、钩子及 MCP 服务器。",
       "context": "/agy-customizations 技能说明第三行"
     },
     {
-      "offset": "0x02e834c2",
+      "offset": "0x02e87b69",
       "en": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
       "zh": "提供 Google Antigravity（AGY）的完整指南、快速参考和导航，涵盖 Antigravity CLI（agy）、Antigravity 2.0、Antigravity IDE、Python SDK、斜杠命令、快捷键及自定义功能（技能、规则、MCP、sidecar）。当用户询问如何使用、配置或自定义 Antigravity、AGY、agy CLI、Antigravity IDE 或 Antigravity 2.0 时启用此技能。",
       "context": "/antigravity-guide 技能说明"
     },
     {
-      "offset": "0x02d8856f",
+      "offset": "0x02d8c898",
       "en": "Run until the specified goal is completely finished.",
       "zh": "持续运行，直到指定目标彻底完成。",
       "context": "/goal 命令说明"
     },
     {
-      "offset": "0x02db0ad7",
+      "offset": "0x02db4ed6",
       "en": "Run an instruction on a recurring schedule or as a one-time timer.",
       "zh": "按计划重复运行指令，或设置一次性定时任务。",
       "context": "/schedule 命令说明"
     },
     {
-      "offset": "0x02f46997",
+      "offset": "0x02f4c3ef",
       "en": "Automatically migrate legacy workflows (.agents/workflows/ or ~/.gemini/config/workflows/) to skills (.agents/skills/ or ~/.gemini/config/skills/). Scans for existing workflows, creates target SKILL.md files, and archives old workflow files.",
       "zh": "自动将旧工作流（.agents/workflows/ 或 ~/.gemini/config/workflows/）迁移为技能（.agents/skills/ 或 ~/.gemini/config/skills/）。扫描现有工作流，创建目标 SKILL.md 文件，并归档旧工作流。",
       "context": "/migrate-workflows 技能说明"
+    },
+    {
+      "offset": "0x02f25f77",
+      "en": "How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
+      "zh": "在聊天中内联渲染丰富的交互式 HTML 组件，或作为独立产物展示。当你需要向用户呈现图表、数据可视化、交互控件、教学演示，或任何超越纯文本和 Markdown 的丰富视觉内容时使用此技能。",
+      "context": "/generative_ui 技能说明"
+    },
+    {
+      "offset": "0x02c70df1",
+      "en": "Models & Quota",
+      "zh": "模型额度",
+      "context": "/usage 页面标题"
+    },
+    {
+      "offset": "0x02be0073",
+      "en": "Account:",
+      "zh": "账户:",
+      "context": "/usage 账户标签"
+    },
+    {
+      "offset": "0x02d8d01c",
+      "en": "  For Antigravity Business consumption options, see",
+      "zh": "  Antigravity Business 消费方式详见",
+      "context": "/usage Business 消费说明"
+    },
+    {
+      "offset": "0x02ccea31",
+      "en": "Loading quota summary...",
+      "zh": "加载额度概览...",
+      "context": "/usage 加载提示"
+    },
+    {
+      "offset": "0x02b978ef",
+      "en": "Disabled",
+      "zh": "禁用",
+      "context": "/usage 禁用状态"
+    },
+    {
+      "offset": "0x02c104a7",
+      "en": "MODEL CREDITS",
+      "zh": "模型点数",
+      "context": "/usage 模型点数标题"
+    },
+    {
+      "offset": "0x02dc6120",
+      "en": "  Use your AI credits to fulfill model requests once you're out of quota.",
+      "zh": "  标准额度用完后，使用 AI 点数继续调用模型。",
+      "context": "/usage AI 点数说明"
+    },
+    {
+      "offset": "0x02cdb13d",
+      "en": "  AI Credit Overages: %s",
+      "zh": "  AI 点数超额: %s",
+      "context": "/usage AI 点数超额标签"
+    },
+    {
+      "offset": "0x02cf26d1",
+      "en": "  Available AI Credits: %s",
+      "zh": "  可用 AI 点数: %s",
+      "context": "/usage 可用 AI 点数标签"
+    },
+    {
+      "offset": "0x02c39a04",
+      "en": "Quota exhausted",
+      "zh": "额度耗尽",
+      "context": "/usage 额度耗尽状态"
+    },
+    {
+      "offset": "0x02c104b4",
+      "en": "Refreshes in",
+      "zh": "距刷新",
+      "context": "/usage 单独刷新提示"
+    },
+    {
+      "offset": "0x02c4cee6",
+      "en": "%.0f%% remaining",
+      "zh": "剩余 %.0f%%",
+      "context": "/usage 单独剩余额度提示"
+    },
+    {
+      "offset": "0x02d38331",
+      "en": "%.0f%% remaining · Refreshes in %s",
+      "zh": "%.0f%% 剩余 · %s 后刷新",
+      "context": "/usage 剩余额度与刷新提示"
+    },
+    {
+      "offset": "0x02c399f5",
+      "en": "Quota available",
+      "zh": "额度可用",
+      "context": "/usage 额度可用状态"
+    },
+    {
+      "offset": "0x02b71e8c",
+      "en": "Scroll",
+      "zh": "滚动",
+      "context": "/usage 底部滚动提示"
+    },
+    {
+      "offset": "0x02b5a501",
+      "en": "Page",
+      "zh": "页",
+      "context": "/usage 底部翻页提示"
+    },
+    {
+      "offset": "0x02b71e92",
+      "en": "Bottom",
+      "zh": "底部",
+      "context": "/usage 底部跳转提示"
+    },
+    {
+      "offset": "0x02b538db",
+      "en": "Top",
+      "zh": "顶",
+      "context": "/usage 顶部跳转提示"
+    },
+    {
+      "offset": "0x02b64be8",
+      "en": "Close",
+      "zh": "关",
+      "context": "/usage 底部关闭提示"
     }
   ]
 }
