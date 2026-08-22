@@ -19,6 +19,19 @@ bash scripts/install.sh
 
 ## 场景二：AGY 官方升级后重新汉化
 
+优先运行低 token 自动流程：
+
+```bash
+bash scripts/auto_update.sh
+```
+
+旧译文能通过唯一上下文确认时会自动继承；发现新增/变更 Skill、消失文案或歧义偏移时，
+命令以退出码 `2` 暂停。先阅读 `.upgrade/<版本>/report.json`；只有需要 AI 时，才把同目录
+的 `AI_REVIEW.md` 交给 AI。处理清单后重新运行命令。自动流程不会提交 Git，也不能替代
+本节末尾的真实 TUI 检查。
+
+需要逐步诊断时使用下面的人工流程：
+
 ```bash
 # 1. 确认新版本
 agy --version
@@ -38,6 +51,10 @@ bash scripts/patch_binary.sh
 bash scripts/patch_skill_descriptions.sh
 bash scripts/smoke_test.sh
 ```
+
+最后启动真实 `agy`，依次检查 `/` 菜单首屏与末屏、`/settings`、`/usage` 和底部快捷键。
+若发现全新的二进制界面英文，把该屏幕与对应上下文作为新的小型 AI 输入；不要重新发送
+整张历史翻译表或整个二进制。
 
 ## 场景三：汉化不生效
 

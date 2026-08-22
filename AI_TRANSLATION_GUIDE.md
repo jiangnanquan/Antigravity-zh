@@ -59,6 +59,10 @@ len(中文译文.encode("utf-8")) <= len(英文原文.encode("utf-8"))
 
 ## 新增二进制翻译
 
+官方小版本升级时，先运行 `bash scripts/auto_update.sh`。拥有唯一相邻上下文证据的旧条目
+由脚本机械继承，不需要 AI 重新翻译；只有 `.upgrade/<版本>/AI_REVIEW.md` 中的消失、歧义、
+新增或变更项才应进入模型上下文。任何自动继承都不免除真实 TUI 验收。
+
 每条 `i18n/binary-translations.json` 记录必须包含：
 
 ```json

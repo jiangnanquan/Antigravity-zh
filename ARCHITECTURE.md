@@ -149,6 +149,11 @@ macOS 直接 `SIGKILL`（退出码 137）。
 7. patch 后使用 ad-hoc hardened-runtime 签名，Google 原签名版本按版本保留为
    `agy.zh-backup-<version>`，可一键恢复；已有旧备份不会被覆盖。
 
+版本升级时，`prepare_upgrade.py` 会从旧原件提取每条记录左右 32–128 字节的局部上下文，
+只接受在新原件中唯一命中的重定位结果。它不使用“第 N 次出现”作为证据；无法唯一确认的
+条目和新增/变更内置 Skill 会进入 `.upgrade/` 的短报告。`auto_update.sh` 仅在待审项为零
+时继续测试和安装，因此绝大多数未变化文案可以零 AI 继承，AI 只读取真正的差异。
+
 斜杠菜单中的普通命令说明来自二进制；`agy-customizations`、
 `antigravity-guide` 和 `migrate-workflows` 等系统 Skill 则从
 `~/.gemini/antigravity-cli/builtin/skills/` 的已解包 `SKILL.md` 读取。

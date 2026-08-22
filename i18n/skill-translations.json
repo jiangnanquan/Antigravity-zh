@@ -27,6 +27,12 @@
       "en": "description: Automatically migrate legacy workflows (.agents/workflows/ or ~/.gemini/config/workflows/) to skills (.agents/skills/ or ~/.gemini/config/skills/). Scans for existing workflows, creates target SKILL.md files, and archives old workflow files.",
       "zh": "description: 自动将旧工作流（.agents/workflows/ 或 ~/.gemini/config/workflows/）迁移为技能（.agents/skills/ 或 ~/.gemini/config/skills/）。扫描现有工作流，创建目标 SKILL.md 文件，并归档旧工作流。",
       "context": "/migrate-workflows 右侧说明"
+    },
+    {
+      "path": "skills/permissioned-github/SKILL.md",
+      "en": "description: Guidelines for interacting with GitHub and request permissions from the user when commands fail due to restrictions in the agent environment.",
+      "zh": "description: 与 GitHub 交互的操作指南；当命令因代理环境的权限限制而失败时，向用户请求授权。",
+      "context": "/permissioned-github 右侧说明"
     }
   ]
 }

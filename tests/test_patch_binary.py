@@ -170,6 +170,7 @@ class ManifestContractTests(unittest.TestCase):
         skill_paths = {item["path"] for item in skill_manifest["patches"]}
         self.assertIn("skills/migrate-workflows/SKILL.md", skill_paths)
         self.assertIn("skills/generative_ui/SKILL.md", skill_paths)
+        self.assertIn("skills/permissioned-github/SKILL.md", skill_paths)
 
     def test_usage_client_surface_is_covered_without_server_payloads(self) -> None:
         manifest = json.loads((ROOT / "i18n" / "binary-translations.json").read_text())

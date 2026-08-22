@@ -82,7 +82,7 @@ AGY CLI 的显示来自 **三处**。本项目汉化 Go 二进制主体和已解
 
 - macOS arm64
 - `curl`、`python3`、Node.js、Go（官方原包下载、补丁、HUD 检查和偏移维护）
-- `agy` v1.1.17（当前偏移表严格锁定此版本）
+- `agy` v1.1.18（当前偏移表严格锁定此版本）
 - `agy-hud` 插件（仅用于状态栏，保持原版）
 
 ## macOS 快速开始
@@ -101,13 +101,37 @@ bash scripts/patch_binary.sh --dry-run
 
 二进制层会从清单固定的官方 HTTPS 地址取得发布包，依次校验归档 SHA-512、解包后
 SHA-256、版本号和 Google Developer ID 签名，再按版本保留原件，例如
-`~/.local/bin/agy.zh-backup-1.1.17`。汉化后的可执行文件使用 macOS ad-hoc
+`~/.local/bin/agy.zh-backup-1.1.18`。汉化后的可执行文件使用 macOS ad-hoc
 hardened-runtime 签名。升级到其他 `agy` 版本时，脚本会失败关闭，不会拿旧备份覆盖
 新版；旧的无版本号备份也不会被删除或覆盖。
 
 官方 `agy` 会在日常运行中后台自更新，因此一次安装不能永久跨越未来版本。新版本发布
 后需要先为该版本重新定位精确偏移；适配完成后再次运行 `bash scripts/install.sh` 即可从
 干净官方原件重建汉化版，避免把增量更新后的中英混合二进制继续当作补丁来源。
+
+## 低 token 自动升级
+
+日常升级不需要让 AI 重新读取 170MB 二进制或重译整张表。维护者可运行：
+
+```bash
+bash scripts/auto_update.sh
+```
+
+流程先读取官方在线发布清单并验证版本、归档 SHA-512、二进制 SHA-256 与 Google
+Developer ID 签名；若 PATH 中恰好是同版本的 Google 原签名文件，会直接复用以节省下载。
+每条旧译文只在“英文原文仍存在，且至少一侧 32–128 字节上下文在新二进制中唯一匹配”
+时自动继承新偏移，不按出现次数猜测，也不做全局替换。零待审项时，脚本才会更新清单、
+运行测试并重新安装汉化版。
+
+若旧文案消失、上下文歧义、内置 Skill 新增或说明变更，自动流程会以退出码 `2` 暂停，
+在 `.upgrade/<版本>/report.json` 写入短报告，并生成只含差异的 `AI_REVIEW.md`。维护者只需
+查看这几十行内容，再决定是否交给 AI；历史译文和已确认偏移不会进入提示词，从而把 token
+消耗限制在真正新增的部分。`.upgrade/` 已被 Git 忽略，不会误提交本机扫描产物。
+
+这套流程不会自动提交或推送 Git，也不会声称仅靠静态扫描发现了所有全新二进制界面。
+发布前仍必须启动真实 `agy`，检查 `/` 菜单首尾、`/settings`、`/usage` 和底部快捷键；
+若真实界面出现报告未覆盖的新英文，再把那一小段交给 AI。这样自动化负责可证明的机械
+工作，人类只负责新增语义和最终视觉验收。
 
 ## Windows AI 自适配协议
 
@@ -251,6 +275,8 @@ Antigravity-zh/
 │   ├── install.sh               # 默认安装与完整验收入口
 │   ├── patch_binary.py          # 哈希、偏移、签名、原子替换
 │   ├── patch_binary.sh          # 二进制层汉化入口
+│   ├── prepare_upgrade.py       # 低 token 重定位、差异报告与 AI 最小接入包
+│   ├── auto_update.sh           # 非交互升级、测试与安装入口
 │   ├── patch_skill_descriptions.sh # 内置 Skill 说明汉化入口
 │   ├── go_func_ranges.go        # 从 Go pclntab 定位渲染函数
 │   └── smoke_test.sh            # 一键冒烟测试
@@ -262,7 +288,7 @@ Antigravity-zh/
 
 | 组件 | 版本 | 说明 |
 |------|------|------|
-| `agy` 二进制 | v1.1.17 | SHA-256 锁定适配版本 |
+| `agy` 二进制 | v1.1.18 | SHA-256 锁定适配版本 |
 | `agy-hud` 插件 | 当前安装版本 | 默认保持原版 |
 | 平台 | macOS arm64 | 当前唯一维护和实机验证的平台；Windows 仅提供 AI 自适配协议 |
 
