@@ -163,6 +163,7 @@ class ManifestContractTests(unittest.TestCase):
         contexts = {item["context"] for item in manifest["patches"]}
         self.assertIn("/goal 命令说明", contexts)
         self.assertIn("/schedule 命令说明", contexts)
+        self.assertIn("/voice 命令说明", contexts)
         self.assertIn("/migrate-workflows 技能说明", contexts)
         self.assertIn("/generative_ui 技能说明", contexts)
 
