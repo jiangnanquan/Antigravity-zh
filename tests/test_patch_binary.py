@@ -164,6 +164,8 @@ class ManifestContractTests(unittest.TestCase):
         self.assertIn("/goal 命令说明", contexts)
         self.assertIn("/schedule 命令说明", contexts)
         self.assertIn("/voice 命令说明", contexts)
+        self.assertIn("/browser 技能说明", contexts)
+        self.assertIn("/boost 技能说明", contexts)
         self.assertIn("/migrate-workflows 技能说明", contexts)
         self.assertIn("/generative_ui 技能说明", contexts)
 
