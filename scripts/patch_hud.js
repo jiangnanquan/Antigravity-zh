@@ -6,7 +6,8 @@ const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const BACKUP_SUFFIX = '.antigravity-zh.orig';
+const BACKUP_SUFFIX = '.agy-zh.orig';
+const LEGACY_BACKUP_SUFFIX = '.antigravity-zh.orig';
 const REQUIRED_FILES = [
   'renderer/lang.js',
   'renderer.js',
@@ -19,8 +20,9 @@ function unique(values) {
 }
 
 function discoverRuntimeRoots() {
-  if (process.env.ANTIGRAVITY_ZH_HUD_ROOTS) {
-    return unique(process.env.ANTIGRAVITY_ZH_HUD_ROOTS.split(path.delimiter).filter(Boolean));
+  const envRoots = process.env.AGY_ZH_HUD_ROOTS || process.env.ANTIGRAVITY_ZH_HUD_ROOTS;
+  if (envRoots) {
+    return unique(envRoots.split(path.delimiter).filter(Boolean));
   }
 
   const home = os.homedir();
@@ -160,8 +162,15 @@ function patchRoot(root) {
 function restoreRoot(root) {
   for (const relativePath of REQUIRED_FILES) {
     const target = path.join(root, relativePath);
-    const backup = target + BACKUP_SUFFIX;
-    if (!fs.existsSync(backup)) throw new Error(`${backup} does not exist`);
+    let backup = target + BACKUP_SUFFIX;
+    if (!fs.existsSync(backup)) {
+      const legacyBackup = target + LEGACY_BACKUP_SUFFIX;
+      if (fs.existsSync(legacyBackup)) {
+        backup = legacyBackup;
+      } else {
+        throw new Error(`${backup} does not exist`);
+      }
+    }
     fs.copyFileSync(backup, target);
   }
 }

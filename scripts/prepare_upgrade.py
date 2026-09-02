@@ -346,7 +346,7 @@ def main() -> int:
     if is_upgrade:
         old_source = patch_binary.backup_path(old_manifest)
         patch_binary.validate_source(old_source, old_manifest)
-        with tempfile.TemporaryDirectory(prefix="antigravity-zh-upgrade-") as temp_dir:
+        with tempfile.TemporaryDirectory(prefix="agy-zh-upgrade-") as temp_dir:
             if args.new_binary is not None:
                 new_source = args.new_binary.expanduser().resolve()
                 validate_google_binary(new_source, release["version"])

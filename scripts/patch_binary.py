@@ -193,7 +193,7 @@ def select_existing_source(manifest: dict) -> Path | None:
 
 def apply_patch(dry_run: bool) -> None:
     manifest = load_manifest()
-    with tempfile.TemporaryDirectory(prefix="antigravity-zh-") as temp_dir:
+    with tempfile.TemporaryDirectory(prefix="agy-zh-") as temp_dir:
         work_dir = Path(temp_dir)
         source = select_existing_source(manifest)
         downloaded = source is None

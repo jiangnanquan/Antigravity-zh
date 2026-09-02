@@ -12,7 +12,8 @@ import tempfile
 
 ROOT = Path.home() / ".gemini" / "antigravity-cli" / "builtin"
 MANIFEST = Path(__file__).resolve().parent.parent / "i18n" / "skill-translations.json"
-BACKUP_SUFFIX = ".antigravity-zh.orig"
+BACKUP_SUFFIX = ".agy-zh.orig"
+LEGACY_BACKUP_SUFFIX = ".antigravity-zh.orig"
 
 
 def load_manifest() -> dict:
@@ -66,6 +67,8 @@ def restore() -> None:
     for item in load_manifest()["patches"]:
         target = ROOT / item["path"]
         backup = target.with_name(target.name + BACKUP_SUFFIX)
+        if not backup.exists():
+            backup = target.with_name(target.name + LEGACY_BACKUP_SUFFIX)
         if not backup.exists():
             raise RuntimeError(f"找不到备份：{backup}")
         atomic_write(target, backup.read_text(encoding="utf-8"))

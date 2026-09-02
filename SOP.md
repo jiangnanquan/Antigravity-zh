@@ -4,8 +4,8 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/jiangnanquan/Antigravity-zh.git
-cd Antigravity-zh
+git clone https://github.com/jiangnanquan/agy-zh.git
+cd agy-zh
 
 # 2. 预检、安装并自动验收
 bash scripts/install.sh

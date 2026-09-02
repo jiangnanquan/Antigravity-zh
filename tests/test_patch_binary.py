@@ -23,7 +23,7 @@ def digest(data: bytes) -> str:
 
 class SourceSelectionTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.temp_dir = tempfile.TemporaryDirectory(prefix="antigravity-zh-test-")
+        self.temp_dir = tempfile.TemporaryDirectory(prefix="agy-zh-test-")
         self.root = Path(self.temp_dir.name)
         self.target = self.root / "agy"
         self.legacy_backup = self.root / "agy.zh-backup"

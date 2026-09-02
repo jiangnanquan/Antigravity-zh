@@ -1,4 +1,4 @@
-# Antigravity-zh — Antigravity CLI 简体中文汉化
+# agy-zh — Antigravity CLI 简体中文汉化
 
 > 为 Google Antigravity CLI（`agy`）提供简体中文界面汉化。
 > **只做 UI 文字汉化，不碰任何功能逻辑。**
@@ -257,7 +257,7 @@ bash scripts/patch_skill_descriptions.sh --restore
 ## 目录结构
 
 ```
-Antigravity-zh/
+agy-zh/
 ├── README.md                    # 本文件
 ├── AGENTS.md                    # AI 代理维护契约
 ├── AI_TRANSLATION_GUIDE.md      # AI 汉化规范
