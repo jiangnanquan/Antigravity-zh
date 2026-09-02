@@ -89,6 +89,12 @@ function resolveLanguage(config, env = process.env) {
 
 这些改动不在默认流程中启用。
 
+### macOS 凭证发现与极简排版优化
+
+- **macOS 系统钥匙串适配**：`agy` 在 macOS 上通过系统 Keychain（`service: "gemini", account: "antigravity"`）加密存储 OAuth Token。HUD 运行时通过安全调用 `/usr/bin/security` 并解析 `go-keyring-base64` 数据获取凭据，解决 macOS 终端误报“未登录 Antigravity”的问题。
+- **两层极简排版与自适应列宽**：第一行汇集项目文本元数据与 Token 细分统计，第二行自适应内联上下文容量与模型配额进度条（如 Gemini 与 Opus），去除多余边框与空白。
+- **推荐预设**：项目在 `presets/agy-hud.config.json` 中提供预调优的赛博朋克极简预设，方便一键部署。
+
 ---
 
 ## 第二层：Go 二进制层

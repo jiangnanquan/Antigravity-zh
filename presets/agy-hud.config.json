@@ -1,0 +1,28 @@
+{
+  "theme": {
+    "primary": "magenta",
+    "secondary": "gray",
+    "warning": "yellow",
+    "critical": "red"
+  },
+  "display": {
+    "showTokenBar": true,
+    "showBreadcrumbs": true,
+    "showGitBranch": true,
+    "showCurrentDir": true,
+    "breadcrumbCount": 3,
+    "useNerdFonts": true,
+    "unicode": true,
+    "showUsername": false,
+    "quotaStyle": "table",
+    "models": [
+      "flash high",
+      "opus"
+    ]
+  },
+  "thresholds": {
+    "warning": 0.7,
+    "critical": 0.9
+  },
+  "language": "auto"
+}

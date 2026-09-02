@@ -82,7 +82,7 @@ AGY CLI 的显示来自 **三处**。本项目汉化 Go 二进制主体和已解
 
 - macOS arm64
 - `curl`、`python3`、Node.js、Go（官方原包下载、补丁、HUD 检查和偏移维护）
-- `agy` v1.1.23（当前偏移表严格锁定此版本）
+- `agy` v1.1.24（当前偏移表严格锁定此版本）
 - `agy-hud` 插件（仅用于状态栏，保持原版）
 
 ## macOS 快速开始
@@ -101,7 +101,7 @@ bash scripts/patch_binary.sh --dry-run
 
 二进制层会从清单固定的官方 HTTPS 地址取得发布包，依次校验归档 SHA-512、解包后
 SHA-256、版本号和 Google Developer ID 签名，再按版本保留原件，例如
-`~/.local/bin/agy.zh-backup-1.1.23`。汉化后的可执行文件使用 macOS ad-hoc
+`~/.local/bin/agy.zh-backup-1.1.24`。汉化后的可执行文件使用 macOS ad-hoc
 hardened-runtime 签名。升级到其他 `agy` 版本时，脚本会失败关闭，不会拿旧备份覆盖
 新版；旧的无版本号备份也不会被删除或覆盖。
 
@@ -270,6 +270,8 @@ Antigravity-zh/
 │   ├── hud-translations.json    # HUD 可选实验翻译表
 │   ├── binary-translations.json # 二进制层翻译表（en → zh 对照）
 │   └── skill-translations.json  # 内置 Skill 菜单说明翻译表
+├── presets/
+│   └── agy-hud.config.json      # HUD 推荐极简配置预设（赛博朋克 / 双模型内联）
 ├── scripts/
 │   ├── patch_hud.sh             # HUD 可选汉化/原版恢复入口
 │   ├── install.sh               # 默认安装与完整验收入口
@@ -288,10 +290,11 @@ Antigravity-zh/
 
 | 组件 | 版本 | 说明 |
 |------|------|------|
-| `agy` 二进制 | v1.1.23 | SHA-256 锁定适配版本 |
-| `agy-hud` 插件 | 当前安装版本 | 默认保持原版 |
+| `agy` 二进制 | v1.1.24 | SHA-256 锁定适配版本 |
+| `agy-hud` 插件 | 当前安装版本 | 默认保持原版（提供 `presets/` 极简预设与 macOS 钥匙串适配） |
 | 平台 | macOS arm64 | 当前唯一维护和实机验证的平台；Windows 仅提供 AI 自适配协议 |
 
-## License
+## 致谢与开源协议
 
-[MIT](LICENSE)
+- 本项目基于 [MIT](LICENSE) 协议开源。
+- 状态栏增强与 HUD 模块基于 [agy-hud](https://github.com/icebear0828/agy-hud)（MIT License）提供生态兼容与配置预设。

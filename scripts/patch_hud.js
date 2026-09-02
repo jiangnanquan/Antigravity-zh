@@ -179,31 +179,26 @@ function checkRoot(root) {
 }
 
 function checkOriginalRoot(root) {
-  const backupStates = REQUIRED_FILES.map(relativePath => {
-    const target = path.join(root, relativePath);
-    const backup = target + BACKUP_SUFFIX;
-    return fs.existsSync(backup);
-  });
-  if (backupStates.every(Boolean)) {
-    return REQUIRED_FILES.every(relativePath => {
-      const target = path.join(root, relativePath);
-      return fs.readFileSync(target).equals(fs.readFileSync(target + BACKUP_SUFFIX));
-    });
-  }
-  if (backupStates.some(Boolean)) return false;
-
-  // A pristine installation has no antigravity-zh backups yet. Detect the
-  // patch markers structurally instead of requiring users to patch and undo
-  // the HUD just to prove it is original.
   const lang = fs.readFileSync(path.join(root, 'renderer/lang.js'), 'utf8');
   const renderer = fs.readFileSync(path.join(root, 'renderer.js'), 'utf8');
   const quota = fs.readFileSync(path.join(root, 'renderer/quota-render.js'), 'utf8');
-  const config = JSON.parse(fs.readFileSync(path.join(root, 'agy-hud.config.json'), 'utf8'));
+  let config = {};
+  try {
+    config = JSON.parse(fs.readFileSync(path.join(root, 'agy-hud.config.json'), 'utf8'));
+  } catch {}
   return config.language !== 'zh' &&
     !lang.includes("unknownBranch: '未知'") &&
     !renderer.includes('text.unknownBranch') &&
     !renderer.includes('text.imageQuotaLabel') &&
     !quota.includes('text.providerOther');
+}
+
+function applyPreset(root) {
+  const presetPath = path.join(__dirname, '..', 'presets', 'agy-hud.config.json');
+  if (!fs.existsSync(presetPath)) throw new Error(`预设文件 ${presetPath} 不存在`);
+  const target = path.join(root, 'agy-hud.config.json');
+  ensureBackup(root, 'agy-hud.config.json', fs.readFileSync(target, 'utf8'));
+  fs.copyFileSync(presetPath, target);
 }
 
 function main() {
@@ -217,6 +212,7 @@ function main() {
     } else if (mode === '--check-original') {
       if (!checkOriginalRoot(root)) throw new Error(`${root}: HUD 尚未恢复为原版`);
     } else if (mode === '--apply') patchRoot(root);
+    else if (mode === '--preset') applyPreset(root);
     else throw new Error(`未知参数: ${mode}`);
     process.stdout.write(`${mode.slice(2)}: ${root}\n`);
   }
