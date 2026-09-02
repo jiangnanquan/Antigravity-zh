@@ -82,7 +82,7 @@ AGY CLI 的显示来自 **三处**。本项目汉化 Go 二进制主体和已解
 
 - macOS arm64
 - `curl`、`python3`、Node.js、Go（官方原包下载、补丁、HUD 检查和偏移维护）
-- `agy` v1.1.22（当前偏移表严格锁定此版本）
+- `agy` v1.1.23（当前偏移表严格锁定此版本）
 - `agy-hud` 插件（仅用于状态栏，保持原版）
 
 ## macOS 快速开始
@@ -101,7 +101,7 @@ bash scripts/patch_binary.sh --dry-run
 
 二进制层会从清单固定的官方 HTTPS 地址取得发布包，依次校验归档 SHA-512、解包后
 SHA-256、版本号和 Google Developer ID 签名，再按版本保留原件，例如
-`~/.local/bin/agy.zh-backup-1.1.22`。汉化后的可执行文件使用 macOS ad-hoc
+`~/.local/bin/agy.zh-backup-1.1.23`。汉化后的可执行文件使用 macOS ad-hoc
 hardened-runtime 签名。升级到其他 `agy` 版本时，脚本会失败关闭，不会拿旧备份覆盖
 新版；旧的无版本号备份也不会被删除或覆盖。
 
@@ -288,7 +288,7 @@ Antigravity-zh/
 
 | 组件 | 版本 | 说明 |
 |------|------|------|
-| `agy` 二进制 | v1.1.22 | SHA-256 锁定适配版本 |
+| `agy` 二进制 | v1.1.23 | SHA-256 锁定适配版本 |
 | `agy-hud` 插件 | 当前安装版本 | 默认保持原版 |
 | 平台 | macOS arm64 | 当前唯一维护和实机验证的平台；Windows 仅提供 AI 自适配协议 |
 
