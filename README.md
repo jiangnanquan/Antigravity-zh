@@ -266,6 +266,7 @@ agy-zh/
 ├── LICENSE                      # MIT License
 ├── assets/
 │   └── agy-cli-zh-preview.png   # README 汉化效果图
+├── hud/                         # 内置增强版 agy-hud 完整源码（双窗口 5h/1W、权威配额抓取）
 ├── i18n/
 │   ├── hud-translations.json    # HUD 可选实验翻译表
 │   ├── binary-translations.json # 二进制层翻译表（en → zh 对照）
@@ -273,6 +274,7 @@ agy-zh/
 ├── presets/
 │   └── agy-hud.config.json      # HUD 推荐极简配置预设（赛博朋克 / 双模型内联）
 ├── scripts/
+│   ├── install_hud.sh           # 内置 HUD 一键部署与配置应用入口
 │   ├── patch_hud.sh             # HUD 可选汉化/原版恢复入口
 │   ├── install.sh               # 默认安装与完整验收入口
 │   ├── patch_binary.py          # 哈希、偏移、签名、原子替换
@@ -291,7 +293,7 @@ agy-zh/
 | 组件 | 版本 | 说明 |
 |------|------|------|
 | `agy` 二进制 | v1.1.25 | SHA-256 锁定适配版本 |
-| `agy-hud` 插件 | 当前安装版本 | 默认保持原版（提供 `presets/` 极简预设与 macOS 钥匙串适配） |
+| `agy-hud` 插件 | 内置增强版 | 内置完整源码，支持官方 1.1.25 双配额窗口 (5h/1W) 与极简展示预设 |
 | 平台 | macOS arm64 | 当前唯一维护和实机验证的平台；Windows 仅提供 AI 自适配协议 |
 
 ## 致谢与开源协议

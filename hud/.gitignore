@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+.env*
+/docs/
+/dist/
+*.log
+/agy-hud.zip
+/release_tmp/
+/state.json
+/.antigravity/
+/.antigravitycli/
